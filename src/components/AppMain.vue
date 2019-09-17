@@ -12,6 +12,8 @@
                      :timetable="timetable"
                      class="timetable__el"/>
     </ul>
+    <p v-else-if="errorMessages">{{errorMessages}}</p>
+    <p v-else>Список пуст, укажите Слаг заведения</p>
   </main>
 </template>
 
@@ -33,6 +35,9 @@ export default {
     },
     typeStatus() {
       return this.$store.state.typeStatus;
+    },
+    errorMessages() {
+      return this.$store.state.errorMessage;
     },
   },
 

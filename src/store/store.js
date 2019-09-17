@@ -28,6 +28,7 @@ const store = new Vuex.Store({
     currentSlug: null,
     currentTime: { dayOfWeek: currDayOfWeek, time: currTime },
     typeStatus: Status,
+    errorMessage: '',
   },
 
   getters: {
@@ -68,6 +69,9 @@ const store = new Vuex.Store({
     updateTime(state, updateDate) {
       state.currentTime = updateDate;
     },
+    setError(state, error) {
+      state.errorMessage = error;
+    },
   },
 
   actions: {
@@ -78,11 +82,15 @@ const store = new Vuex.Store({
           if (status === 'Success') {
             commit('setCurrentSlug', slugData.place);
           } else {
-            throw new Error('status not equal \'Success\', plz contact me');
+            throw new Error(data);
           }
         })
-        .catch((er) => {
-          console.error('🙀 Что то пошло не так 🙀 ', er);
+        .catch((error) => {
+          if (error.response) {
+            commit('setError', error.response.data.message);
+          }
+
+          console.error('🙀 Что то пошло не так 🙀 ', error);
         });
     },
   },

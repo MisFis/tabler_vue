@@ -4,7 +4,9 @@
       <span class="input-wrapper__text">Слаг заведения</span>
       <input v-model="slugSearch" type="text" class="input-wrapper__input">
     </label>
-    <button class="button button-header" @click.prevent="fetchGetSlagData">Обновить</button>
+    <button class="button button-header" :disabled="!slugSearch" @click.prevent="fetchGetSlagData">
+      Обновить
+    </button>
   </header>
 </template>
 
@@ -13,7 +15,7 @@ export default {
   name: 'AppHeader',
   data() {
     return {
-      slugSearch: 'blackthai',
+      slugSearch: '',
     };
   },
   methods: {

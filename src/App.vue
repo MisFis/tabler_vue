@@ -82,6 +82,10 @@ export default {
     border: 0;
     color: white;
     font-weight: 500;
+
+    &:disabled {
+      background-color: #737373;
+    }
   }
 
 </style>
